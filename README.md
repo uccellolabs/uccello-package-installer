@@ -7,7 +7,7 @@ It uses the PHP class [ZipArchive](https://www.php.net/manual/fr/class.ziparchiv
 ## Installation
 
 ```
-composer install uccello/package-installer
+composer require uccello/package-installer
 ```
 
 **Warning:** If you don't want to have problems with git, consider adding the followind lines to `.gitignore` file located at the root of your Uccello project:
