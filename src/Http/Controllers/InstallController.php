@@ -87,6 +87,9 @@ class InstallController extends IndexController
 
         // Install package
         $this->installPackageWithComposer();
+
+        // Display success message
+        return $this->displaySuccessMessage();
     }
 
     /**
@@ -98,7 +101,11 @@ class InstallController extends IndexController
      */
     protected function isMimeTypeCorrect(string $expectedMimeType) : bool
     {
-        $mimeType = $this->request->file($this->zipInputFieldName)->getMimeType();
+        if (!$this->request->has($this->zipInputFieldName)) {
+            $mimeType = null;
+        } else {
+            $mimeType = $this->request->file($this->zipInputFieldName)->getMimeType();
+        }
 
         return $mimeType === $expectedMimeType;
     }
@@ -338,7 +345,8 @@ class InstallController extends IndexController
     }
 
     /**
-     * Informs Uccello to display an error message into a notification.
+     * Informs Uccello to display an error message into a notification
+     * and redirect user to previous page.
      *
      * @param string $errorCode
      * @param array $replace
@@ -348,6 +356,18 @@ class InstallController extends IndexController
     protected function displayErrorMessage($errorCode, $replace = [])
     {
         ucnotify(uctrans($errorCode, $this->module, $replace), 'error');
+        return redirect()->back();
+    }
+
+    /**
+     * Informs Uccello to display a success message into a notification
+     * and redirect user to previous page.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    protected function displaySuccessMessage()
+    {
+        ucnotify(uctrans('success.installed', $this->module), 'success');
         return redirect()->back();
     }
 }
