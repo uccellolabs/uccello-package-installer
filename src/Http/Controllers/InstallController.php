@@ -200,7 +200,7 @@ class InstallController extends IndexController
 
         $vendor = $packageInformation->vendor;
 
-        $packageDirectory = rtrim(config('uccello.package.local_directory', 'packages'), '/');
+        $packageDirectory = rtrim(config('uccello.packages.local_directory', 'packages'), '/');
 
         $path = "$packageDirectory/$vendor";
 
