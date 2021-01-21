@@ -1,0 +1,35 @@
+{
+    "name": "uccello/package-installer",
+    "description": "Adds possibility to easily install packages in Uccello projects.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jonathan SARDO",
+            "email": "jonathan@uccellolabs.com"
+        }
+    ],
+    "require": {
+        "ext-zip": "~1.1",
+        "uccello/uccello": "1.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Uccello\\PackageInstaller\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Uccello\\PackageInstaller\\Providers\\AppServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "optimize-autoloader": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
